@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_01_24_114720) do
 
-  create_table "admins", force: :cascade do |t|
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(version: 2021_01_24_114720) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "congestions", force: :cascade do |t|
+  create_table "congestions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "count", null: false
     t.integer "time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "examinations", force: :cascade do |t|
+  create_table "examinations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "reservation_id"
     t.integer "reception_id"
     t.string "diagnosis", default: "", null: false
@@ -43,14 +43,14 @@ ActiveRecord::Schema.define(version: 2021_01_24_114720) do
     t.string "prescription_name"
   end
 
-  create_table "favorites", force: :cascade do |t|
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "patient_id", null: false
     t.integer "information_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "information", force: :cascade do |t|
+  create_table "information", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "theme_id", null: false
     t.string "subject", default: "", null: false
     t.string "image_id", null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_01_24_114720) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "patients", force: :cascade do |t|
+  create_table "patients", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "last_name", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name_kana", default: "", null: false
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2021_01_24_114720) do
     t.index ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true
   end
 
-  create_table "receptions", force: :cascade do |t|
+  create_table "receptions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "patient_id", null: false
     t.integer "congestion_id", null: false
     t.integer "number", null: false
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2021_01_24_114720) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "reservations", force: :cascade do |t|
+  create_table "reservations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "patient_id", null: false
     t.integer "examination_count", null: false
     t.string "symptom", default: "", null: false
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2021_01_24_114720) do
     t.datetime "end_time"
   end
 
-  create_table "themes", force: :cascade do |t|
+  create_table "themes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
