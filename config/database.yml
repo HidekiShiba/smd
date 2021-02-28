@@ -32,7 +32,8 @@
 #   password: <%= ENV['DB_PASSWORD'] %>
 default: &default
   adapter: mysql2
-  encoding: utf8
+  charset: utf8mb4
+  encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 # PasswordとUsernameはdocker-compose.ymlと合わせます
   username: root
