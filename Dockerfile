@@ -10,8 +10,6 @@ RUN apt-get update -qq && \
   nodejs \
   yarn \
   vim
-  # mysql-server \
-  # mysql-client
 
 WORKDIR /smd
 

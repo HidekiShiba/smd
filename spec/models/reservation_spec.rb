@@ -20,63 +20,63 @@ RSpec.describe 'Reservationモデルのテスト', type: :model do
         is_expected.to eq false
       end
     end
-    
+
     context 'body_partsカラム' do
       it '空欄でないこと' do
         reservation.body_parts = ''
         is_expected.to eq false
       end
     end
-    
+
     context 'starting_pointカラム' do
       it '空欄でないこと' do
         reservation.starting_point = ''
         is_expected.to eq false
       end
     end
-    
+
     context 'treatmentカラム' do
       it '空欄でないこと' do
         reservation.treatment = ''
         is_expected.to eq false
       end
     end
-    
+
     context 'side_effectカラム' do
       it '空欄でないこと' do
         reservation.side_effect = ''
         is_expected.to eq false
       end
     end
-    
+
     context 'pregnancyカラム' do
       it '空欄でないこと' do
         reservation.pregnancy = ''
         is_expected.to eq false
       end
     end
-    
+
     context 'purposeカラム' do
       it '空欄でないこと' do
         reservation.purpose = ''
         is_expected.to eq false
       end
     end
-    
+
     context 'examination_statusカラム' do
       it '空欄であること' do
         reservation.examination_status = ''
         is_expected.to eq true
       end
     end
-    
-    context 'start_timeカラム' do
-      it '空欄でないこと' do
-        reservation.start_time = ''
-        is_expected.to eq false
-      end
-    end
-    
+
+    # context 'start_timeカラム' do
+    #   it '空欄でないこと' do
+    #     reservation.start_time = ''
+    #     is_expected.to eq false
+    #   end
+    # end
+
     context 'end_timeカラム' do
       it '空欄でないこと' do
         reservation.end_time = ''
