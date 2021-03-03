@@ -7,16 +7,19 @@ jobs:
     docker:
     - image: circleci/ruby:2.6.3-stretch-node
       environment:
-        - BUNDLER_VERSION: 2.0.2
-        - RAILS_ENV: 'test'
-    - image: circleci/mysql:5.7
+        RAILS_ENV: test
+        MYSQL_HOST: 127.0.0.1
+        MYSQL_USERNAME: 'root'
+        MYSQL_PASSWORD: 'password'
+        MYSQL_PORT: 3306
+    - image: circleci/mysql:5.7-ram
       environment:
-        - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-        - MYSQL_ROOT_HOST: '127.0.0.1'
+        MYSQL_DATABASE: smd_test
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_ROOT_HOST: '%'
 
     working_directory: ~/smd  #自身のアプリディレクトリ名を設定
 
-    # executor: ruby/default
     steps:
     - checkout
 
@@ -52,15 +55,8 @@ jobs:
         name: Run rspec
         command: |
           mkdir /tmp/test-results
-          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-            circleci tests split --split-by=timings)"
-
-          bundle exec rspec \
-            --format progress \
-            --format RspecJunitFormatter \
-            --out /tmp/test-results/rspec.xml \
-            --format progress \
-            $TEST_FILES
+          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+          bundle exec rspec --format progress --color --format documentation
 
     # collect reports
     - store_test_results:
