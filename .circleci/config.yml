@@ -71,7 +71,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - 84:e1:7e:00:32:54:9b:59:33:04:4a:1f:c4:5c:6a:bc
+            - "84:e1:7e:00:32:54:9b:59:33:04:4a:1f:c4:5c:6a:bc"
       - run: ssh ${SSH_USER}@${SSH_HOST} 'cd /home/ec2-user/smd/ && \
                                                     sudo git pull origin main && \
                                                     docker-compose build && \
