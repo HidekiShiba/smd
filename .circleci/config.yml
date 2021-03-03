@@ -18,7 +18,7 @@ jobs:
         MYSQL_ALLOW_EMPTY_PASSWORD: true
         MYSQL_ROOT_HOST: '%'
 
-    working_directory: ~/smd  #自身のアプリディレクトリ名を設定
+    working_directory: ~/smd
 
     steps:
     - checkout
@@ -50,7 +50,7 @@ jobs:
            bundle exec rails db:create
            bundle exec rails db:schema:load
 
-    # run tests!
+    # run tests
     - run:
         name: Run rspec
         command: |
@@ -64,3 +64,27 @@ jobs:
     - store_artifacts:
         path: /tmp/test-results
         destination: test-results
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - 84:e1:7e:00:32:54:9b:59:33:04:4a:1f:c4:5c:6a:bc
+      - run: ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} 'cd /home/ec2-user/smd/ && \
+                                                    sudo git pull origin main && \
+                                                    docker-compose build && \
+                                                    docker-compose run app bin/rails assets:precompile RAILS_ENV=production && \
+                                                    docker-compose up
+workflows:
+  version: 2.1
+  build-test-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
