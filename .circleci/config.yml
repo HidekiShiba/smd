@@ -5,12 +5,86 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+    - image: circleci/ruby:2.6.3-stretch-node
+      environment:
+        RAILS_ENV: test
+        MYSQL_HOST: 127.0.0.1
+        MYSQL_USERNAME: 'root'
+        MYSQL_PASSWORD: 'password'
+        MYSQL_PORT: 3306
+    - image: circleci/mysql:5.7-ram
+      environment:
+        MYSQL_DATABASE: smd_test
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_ROOT_HOST: '%'
+
+    working_directory: ~/smd
+
     steps:
-      - checkout
-      - run:
-          name: Bundler install
-          command: |
-            gem update --system
-            gem install bundler -v 2.2.12
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "Gemfile.lock" }}
+        - v1-dependencies-
+
+    - run:
+        name: install dependencies
+        command: |
+          gem update --system
+          gem install bundler -v 2.2.12
+          bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+    - save_cache:
+        paths:
+        - ./vendor/bundle
+        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+    # Database setup
+    - run: mv ./config/database.yml.ci ./config/database.yml
+
+    # Database setup
+    - run:
+        name: Databasesetup
+        command: |
+           bundle exec rails db:create
+           bundle exec rails db:schema:load
+
+    # run tests
+    - run:
+        name: Run rspec
+        command: |
+          mkdir /tmp/test-results
+          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+          bundle exec rspec --format progress --color --format documentation
+
+    # collect reports
+    - store_test_results:
+        path: /tmp/test-results
+    - store_artifacts:
+        path: /tmp/test-results
+        destination: test-results
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - 84:e1:7e:00:32:54:9b:59:33:04:4a:1f:c4:5c:6a:bc
+      - run: ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} 'cd /home/ec2-user/smd/ && \
+                                                    sudo git pull origin main && \
+                                                    docker-compose build && \
+                                                    docker-compose run app bin/rails assets:precompile RAILS_ENV=production && \
+                                                    docker-compose up
+workflows:
+  version: 2.1
+  build-test-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
