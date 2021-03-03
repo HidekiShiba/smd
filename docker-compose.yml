@@ -45,7 +45,6 @@ services:
       - smd-network
 volumes:
   public-data:
-
   tmp-data:
   log-data:
   db-data:
