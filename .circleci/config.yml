@@ -73,11 +73,8 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "84:e1:7e:00:32:54:9b:59:33:04:4a:1f:c4:5c:6a:bc"
-      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /smd/ && \
-                                              git pull origin main && \
-                                              docker-compose build && \
-                                              docker-compose run app bin/rails assets:precompile RAILS_ENV=production && \
-                                              docker-compose up'
+      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /smd/ && git pull origin main && docker-compose build && docker-compose run app bin/rails assets:precompile RAILS_ENV=production && docker-compose up'
+
 workflows:
   version: 2.1
   build-test-and-deploy:
