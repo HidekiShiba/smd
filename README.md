@@ -52,6 +52,8 @@
 
 - OS：Amazon Linux2
 - クラウド：AWS ec2
+- コンテナ：Docker
+- CI/CD：CircleCI
 - 言語：HTML, CSS, JavaScript, Ruby, SQL
 - フレームワーク：Ruby on Rails
 - JS ライブラリ：jQuery
