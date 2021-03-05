@@ -1,4 +1,4 @@
-# smart_doctor
+# SmartDoctor
 
 ## サイト概要
 
