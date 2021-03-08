@@ -5,8 +5,8 @@
       <%= form_with model: @reservation, local: true do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
         <table class="table-sm">
-          <tr><td class="table-active">受診開始時間　<span class="badge badge-danger">入力不可</span></td><td data-toggle="modal" data-target="#edit_reservation"><%= f.text_field :start_time, class: "form-control input-start"%></td></tr>
-          <tr><td class="table-active">受診終了時間　<span class="badge badge-danger">入力不可</span></td><td data-toggle="modal" data-target="#edit_reservation"><%= f.text_field :end_time, class: "form-control input-end"%></td></tr>
+          <tr><td class="table-active">受診開始時間</td><td data-toggle="modal" data-target="#edit_reservation"><%= f.text_field :start_time, class: "form-control input-start"%></td></tr>
+          <tr><td class="table-active">受診終了時間</td><td data-toggle="modal" data-target="#edit_reservation"><%= f.text_field :end_time, class: "form-control input-end"%></td></tr>
           <tr><td class="table-active">受診回数　<span class="badge badge-danger">必須</span></td><td><%= f.select :examination_count, Reservation.examination_counts.keys, include_blank: "選択して下さい", class: "form-control"%></td></tr>
           <tr><td class="table-active">症状　<span class="badge badge-danger">必須</span></td><td><%= f.text_area :symptom, class: "form-control"%></td></tr>
           <tr><td class="table-active">身体部位　<span class="badge badge-danger">必須</span></td><td><%= f.text_field :body_parts, class: "form-control"%></td></tr>

@@ -11,7 +11,7 @@ class Admin::ReservationsController < ApplicationController
   def edit
     @reservation = Reservation.find(params[:id])
   end
-  
+
   def update
     @reservation = Reservation.find(params[:id])
     @reservation.update(reservation_params)
@@ -31,7 +31,7 @@ class Admin::ReservationsController < ApplicationController
     @reservation.destroy
     redirect_to request.referer, danger: '予約を取り消しました'
   end
-  
+
   private
   def reservation_params
     params.require(:reservation).permit(

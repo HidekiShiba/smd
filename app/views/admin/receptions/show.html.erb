@@ -8,7 +8,7 @@
        </tr>
       </table>
       <table class="table-sm table-bordered">
-        <tr><td class="table-active">受診開始予定時間</td><td><%= @reception.start_time.strftime("%Y/%m/%d %H:%M") %></td></tr>
+        <tr><td class="table-active">受診開始予定時間</td><td><%= l @reception.start_time %></td></tr>
         <tr><td class="table-active">受診ステータス</td><td><%= @reception.examination_status %></td></tr>
       </table>
     </div>

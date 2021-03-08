@@ -4,7 +4,7 @@ class Public::SearchesController < ApplicationController
     @content = params["search"]["content"]
     @datas = partical(@model, @content)
   end
-  
+
   private
   def partical(model, content)
     if model == 'information'

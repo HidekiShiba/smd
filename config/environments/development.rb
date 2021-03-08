@@ -70,4 +70,6 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+
+  config.logger = Logger.new(STDOUT)
 end

@@ -16,7 +16,7 @@
           <tr>
             <td><%= @congestion.count %></td>
             <td><%= @congestion.time %></td>
-            <td><%= (DateTime.current + Rational(1 * @congestion.time, 24 * 60)).strftime("%Y/%m/%d %H:%M") %></td>
+            <td><%= l(DateTime.current + Rational(1 * @congestion.time, 24 * 60)) %></td>
           </tr>
         </tbody>
       </table>
@@ -25,7 +25,7 @@
       平日9:00-13:00、15:00-19:00、<br/>
       土曜9:00-13:00に再度受付をお願いします。</h6>
       <% end %>
-      <h5 class="mt-5 mb-2 fas fa-stopwatch"> 管理者更新</h5><h6><%= @congestion.updated_at.strftime("%m/%d %H:%M") %>現在</h6>
+      <h5 class="mt-5 mb-2 fas fa-stopwatch"> 管理者更新</h5><h6><%= l @congestion.updated_at %>現在</h6>
       <table class="table-sm table-bordered table-striped">
         <thead class="thead-light">
           <tr>
@@ -61,8 +61,8 @@
         </thead>
         <% @receptions.each do |reception| %>
         <tr>
-          <td><%= link_to reception.start_time.strftime("%Y/%m/%d %H:%M"), admin_reception_path(reception.id) %></td>
-          <td><%= reception.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= link_to l(reception.start_time), admin_reception_path(reception.id) %></td>
+          <td><%= l reception.created_at %></td>
           <td><%= reception.patient.id %></td>
           <td><%= reception.patient.last_name + reception.patient.first_name %></td>
           <td><%= reception.patient.sex %></td>
@@ -92,8 +92,8 @@
         </thead>
         <% @reservations.each do |reservation| %>
         <tr>
-          <td><%= link_to reservation.start_time.strftime("%Y/%m/%d %H:%M"), admin_reservation_path(reservation.id) %></td>
-          <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= link_to l(reservation.start_time), admin_reservation_path(reservation.id) %></td>
+          <td><%= l reservation.created_at %></td>
           <td><%= reservation.patient.id %></td>
           <td><%= reservation.patient.last_name + reservation.patient.first_name %></td>
           <td><%= reservation.patient.sex %></td>

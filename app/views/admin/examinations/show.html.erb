@@ -6,7 +6,7 @@
         <% if @examination.reception_id.nil? %>
         <tr>
           <td><h6>受診日時</h6></td>
-          <td><%= @examination.reservation.start_time.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= l @examination.reservation.start_time %></td>
         </tr>
         <tr>
           <td><h6>患者ID</h6></td>
@@ -27,7 +27,7 @@
         <% else %>
         <tr>
           <td><h6>受診日時</h6></td>
-          <td><%= @examination.reception.start_time.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= l @examination.reception.start_time %></td>
         </tr>
         <tr>
           <td><h6>患者ID</h6></td>

@@ -11,7 +11,7 @@ class Admin::PatientsController < ApplicationController
   def edit
     @patient = Patient.find(params[:id])
   end
-  
+
   def update
     @patient = Patient.find(params[:id])
     if @patient.update(patient_params)
@@ -20,11 +20,11 @@ class Admin::PatientsController < ApplicationController
       render :edit
     end
   end
-  
+
   private
   def patient_params
     params.require(:patient).permit(
-      :last_name, :first_name, :last_name_kana, :first_name_kana, 
+      :last_name, :first_name, :last_name_kana, :first_name_kana,
       :birth_date, :sex, :postal_code, :address, :tel, :email, :is_unsubscribe_flag
     )
   end

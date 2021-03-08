@@ -11,7 +11,7 @@ class Reception < ApplicationRecord
 
   def duplicate
     start_time = self.start_time.strftime("%Y-%m-%d") + " 00:00:00"
-    end_time = self.start_time.strftime("%Y-%m-%d") + "23:59:59"
+    end_time = self.start_time.strftime("%Y-%m-%d") + " 23:59:59"
     if Reception.where("patient_id = ? and start_time >= ? and start_time <= ?", self.patient_id, start_time, end_time).count() > 0
       errors.add(:start_time, "本日分の当日受付はすでに発行済です")
     end

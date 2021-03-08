@@ -17,7 +17,7 @@
         <tbody>
           <% @datas.each do |data| %>
             <tr>
-              <td><%= data.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+              <td><%= l data.created_at %></td>
               <td><%= data.theme.name %></td>
               <td><%= link_to attachment_image_tag(data, :image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60"), information_path(data.id) %></td>
               <td><%= link_to data.subject, information_path(data.id) %></td>

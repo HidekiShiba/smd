@@ -8,7 +8,7 @@ class Admin::InformationsController < ApplicationController
     @new_information = Information.new
     @themes = Theme.all
   end
-  
+
   def create
     @themes = Theme.all
     @new_information = Information.new(information_params)
@@ -27,7 +27,7 @@ class Admin::InformationsController < ApplicationController
     @information = Information.find(params[:id])
     @themes = Theme.all
   end
-  
+
   def update
     @themes = Theme.all
     @information = Information.find(params[:id])
@@ -37,11 +37,10 @@ class Admin::InformationsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
-    
   end
-  
+
   private
   def information_params
     params.require(:information).permit(

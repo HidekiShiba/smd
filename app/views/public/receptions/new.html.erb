@@ -16,7 +16,7 @@
           </tr>
           <tr>
             <td><h6>受診開始予定時間</h6></td>
-            <td><%= f.text_field :start_time, value: @new_reception.start_time.strftime("%Y/%m/%d %H:%M"), readonly: true %>ころ</td>
+            <td><%= f.text_field :start_time, value: l(@new_reception.start_time), readonly: true %>ころ</td>
           </tr>
           <%= f.hidden_field :patient_id %>
           <%= f.hidden_field :congestion_id %>
