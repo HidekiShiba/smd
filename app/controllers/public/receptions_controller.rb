@@ -10,14 +10,15 @@ class Public::ReceptionsController < ApplicationController
   end
 
   def create
-    @new_reception = Reception.new(reception_params)
-    @congestion = Congestion.find(1)
-    if @new_reception.save
-      @congestion.update_attributes(count: @congestion.count + 1, time: @congestion.time + 20)
-      redirect_to patient_path(current_patient.id), warning: '当日受付を完了しました。お気をつけてお越しください。'
-    else
-      render :new
+    ActiveRecord::Base.transaction do
+      @new_reception = Reception.new(reception_params)
+      @congestion = Congestion.find(1)
+      @new_reception.save!
+      @congestion.update_attributes!(count: @congestion.count + 1, time: @congestion.time + 20)
     end
+      redirect_to patient_path(current_patient.id), warning: '当日受付を完了しました。お気をつけてお越しください。'
+    rescue ActiveRecord::RecordInvalid
+      render :new
   end
 
   private

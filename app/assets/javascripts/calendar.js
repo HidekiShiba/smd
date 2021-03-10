@@ -52,7 +52,7 @@ function eventCalendar() {
       if(!$("#patient-name").length > 0) {
         window.location.replace("./patients/sign_in")
       } else {
-    　　$('#new_reservation').modal('show');
+        $('#new_reservation').modal('show');
         $(".input-start").val(moment(startDate).format("YYYY-MM-DD HH:mm"));
         $(".input-end").val(moment(endDate).format("YYYY-MM-DD HH:mm"));
         $('#edit_reservation').modal('hide');
