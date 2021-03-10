@@ -22,10 +22,11 @@ class Reservation < ApplicationRecord
   validate :duplicate
 
   def duplicate
-    start_time = self.start_time.strftime("%Y-%m-%d") + "00:00:00"
-    end_time = self.start_time.strftime("%Y-%m-%d") + "23:59:59"
+    return false unless new_record?
+    start_time = self.start_time.strftime("%Y-%m-%d") + " 00:00:00"
+    end_time = self.start_time.strftime("%Y-%m-%d") + " 23:59:59"
     if Reservation.where("patient_id = ? and start_time >= ? and start_time <= ?", self.patient_id, start_time, end_time).count() > 0
-      errors.add(:start_time, "予約できる時間は１日に１回のみです")
+      errors.add(:start_time, "<予約できる時間は１日に１回のみです>")
     end
   end
 end

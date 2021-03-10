@@ -26,7 +26,7 @@
                 <%= data.last_name + data.first_name %>
               <% end %>
             </td>
-            <td><%= data.birth_date %></td>
+            <td><%= l(data.birth_date) %></td>
             <td><%= data.sex %></td>
             <td><%= data.tel %></td>
             <td><%= data.email %></td>
@@ -61,8 +61,8 @@
         </thead>
         <% @datas.each do |data| %>
         <tr>
-          <td><%= link_to data.start_time.strftime("%Y/%m/%d %H:%M"), admin_reservation_path(data.id) %></td>
-          <td><%= data.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= link_to l(data.start_time), admin_reservation_path(data.id) %></td>
+          <td><%= l data.created_at %></td>
           <td><%= data.patient.id %></td>
           <td><%= data.patient.last_name + data.patient.first_name %></td>
           <td><%= data.patient.sex %></td>
@@ -96,8 +96,8 @@
         </thead>
         <% @datas.each do |data| %>
         <tr>
-          <td><%= link_to data.start_time.strftime("%Y/%m/%d %H:%M"), admin_reception_path(data.id) %></td>
-          <td><%= data.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= link_to l(data.start_time), admin_reception_path(data.id) %></td>
+          <td><%= l data.created_at %></td>
           <td><%= data.patient.id %></td>
           <td><%= data.patient.last_name + data.patient.first_name %></td>
           <td><%= data.patient.sex %></td>
@@ -131,13 +131,13 @@
         <% @datas.each do |data| %>
         <tr>
           <% if data.reception_id.nil? %>
-          <td><%= link_to data.reservation.start_time.strftime("%Y/%m/%d %H:%M"), admin_examination_path(data.id) %></td>
+          <td><%= link_to l(data.reservation.start_time), admin_examination_path(data.id) %></td>
           <td><%= data.reservation.patient.id %></td>
           <td><%= data.reservation.patient.last_name + data.reservation.patient.first_name %></td>
           <td><%= data.reservation.patient.birth_date.strftime("%Y/%m/%d") %></td>
           <td><%= data.reservation.patient.sex %></td>
           <% elsif data.reservation_id.nil? %>
-          <td><%= link_to data.reception.start_time.strftime("%Y/%m/%d %H:%M"), admin_examination_path(data.id) %></td>
+          <td><%= link_to l(data.reception.start_time), admin_examination_path(data.id) %></td>
           <td><%= data.reception.patient.id %></td>
           <td><%= data.reception.patient.last_name + data.reception.patient.first_name %></td>
           <td><%= data.reception.patient.birth_date.strftime("%Y/%m/%d") %></td>

@@ -4,13 +4,13 @@
       <h5 class="mb-4 fas fa-laptop-medical">受診内容詳細</h5>
       <table class="table-sm table-bordered">
         <% if @examination.reception_id.nil? %>
-        <tr><td class="table-active"><h6>受診日時</h6></td><td><%= @examination.reservation.start_time.strftime("%Y/%m/%d %H:%M") %></td></tr>
+        <tr><td class="table-active"><h6>受診日時</h6></td><td><%= l @examination.reservation.start_time %></td></tr>
         <tr><td class="table-active"><h6>患者ID</h6></td><td><%= @examination.reservation.patient.id %></td></tr>
         <tr><td class="table-active"><h6>患者氏名</h6></td><td><%= @examination.reservation.patient.last_name + @examination.reservation.patient.first_name %></td></tr>
         <tr><td class="table-active"><h6>生年月日</h6></td><td><%= @examination.reservation.patient.birth_date.strftime("%Y/%m/%d") %></td></tr>
         <tr><td class="table-active"><h6>性別</h6></td><td><%= @examination.reservation.patient.sex %></td></tr>
         <% elsif @examination.reservation_id.nil? %>
-        <tr><td class="table-active"><h6>受診日時</h6></td><td><%= @examination.reception.start_time.strftime("%Y/%m/%d %H:%M") %></td></tr>
+        <tr><td class="table-active"><h6>受診日時</h6></td><td><%= l @examination.reception.start_time %></td></tr>
         <tr><td class="table-active"><h6>患者ID</h6></td><td><%= @examination.reception.patient.id %></td></tr>
         <tr><td class="table-active"><h6>患者氏名</h6></td><td><%= @examination.reception.patient.last_name + @examination.reception.patient.first_name %></td></tr>
         <tr><td class="table-active"><h6>生年月日</h6></td><td><%= @examination.reception.patient.birth_date.strftime("%Y/%m/%d") %></td></tr>

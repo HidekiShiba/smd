@@ -4,14 +4,14 @@
       <h5 class="mt-5 fas fa-medkit"> 予約内容詳細</h5><br />
       <table class="table-sm">
         <tr>
-          <% if @reservation.start_time.strftime("%Y-%m-%d") > Time.current.strftime("%Y-%m-%d") %> 
+          <% if @reservation.start_time.strftime("%Y-%m-%d") > Time.current.strftime("%Y-%m-%d") %>
           <td><%= link_to '予約内容更新', edit_reservation_path, class:"btn btn-sm btn-outline-primary" %></td>
           <td><button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#reservation_cancel">予約キャンセル</button></td>
           <% end %>
          </tr>
       </table>
       <table class="table-sm table-bordered">
-        <tr><td class="table-active">受診開始時間</td><td><%= @reservation.start_time.strftime("%Y/%m/%d %H:%M") %></td></tr>
+        <tr><td class="table-active">受診開始時間</td><td><%= l @reservation.start_time %></td></tr>
         <tr><td class="table-active">受診回数</td><td><%= @reservation.examination_count %></td></tr>
         <tr><td class="table-active">症状</td><td><%= @reservation.symptom %></td></tr>
         <tr><td class="table-active">身体部位</td><td><%= @reservation.body_parts %></td></tr>

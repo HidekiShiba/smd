@@ -28,10 +28,10 @@
           </thead>
           <% @receptions.each do |reception| %>
             <tr>
-              <td><%= reception.start_time.strftime("%Y/%m/%d %H:%M") %></td>
-              <td><%= reception.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+              <td><%= l reception.start_time %></td>
+              <td><%= l reception.created_at %></td>
               <td><%= reception.number %>人</td>
-              <td><%= reception.congestion.time %>分</td>
+              <td><%= (reception.start_time - reception.created_at).to_i / 60 + 1 %>分</td>
               <td><%= reception.examination_status %></td>
             </tr>
           <% end %>
@@ -49,8 +49,8 @@
           </thead>
           <% @reservations.each do |reservation| %>
             <tr>
-              <td><%= link_to reservation.start_time.strftime("%Y/%m/%d %H:%M"), reservation_path(reservation.id) %></td>
-              <td><%= reservation.updated_at.strftime("%Y/%m/%d %H:%M") %></td>
+              <td><%= link_to l(reservation.start_time), reservation_path(reservation.id) %></td>
+              <td><%= l reservation.updated_at %></td>
               <td><%= reservation.symptom %></td>
               <td><%= reservation.purpose %></td>
               <td><%= reservation.examination_status %></td>
@@ -72,11 +72,11 @@
           <% @examinations.each do |examination| %>
             <tr>
               <% if examination.reception_id.nil? %>
-              <td><%= link_to examination.reservation.start_time.strftime("%Y/%m/%d %H:%M"), examination_path(examination.id) %></td>
+              <td><%= link_to l(examination.reservation.start_time), examination_path(examination.id) %></td>
               <% else %>
-              <td><%= link_to examination.reception.start_time.strftime("%Y/%m/%d %H:%M"), examination_path(examination.id) %></td>
+              <td><%= link_to l(examination.reception.start_time), examination_path(examination.id) %></td>
               <% end %>
-              <td><%= examination.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+              <td><%= l examination.created_at %></td>
               <td><%= examination.diagnosis %></td>
               <td><%= examination.treatment %></td>
               <td><%= examination.prescription_status %></td>
