@@ -50,14 +50,13 @@
 
 ## 開発環境
 
-- OS：Amazon Linux2
+- OS：Mac OS X
 - クラウド：AWS ec2
 - コンテナ：Docker
 - CI/CD：CircleCI
 - 言語：HTML, CSS, JavaScript, Ruby, SQL
 - フレームワーク：Ruby on Rails
 - JS ライブラリ：jQuery
-- IDE：Cloud9
 
 ## 使用素材
 
