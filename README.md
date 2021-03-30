@@ -1,6 +1,6 @@
 # SmartDoctor
 
-- サイトURL：https://www.smartdoctor.work/
+<p>サイトURL：https://www.smartdoctor.work/</p>
 
 ## サイト概要
 
